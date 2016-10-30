@@ -14,4 +14,10 @@
         completions."
     </string>
     <string name="title_activity_registration">Register New User</string>
+    <string name="title_activity_user">Citadel Account</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
