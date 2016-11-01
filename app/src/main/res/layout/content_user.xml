@@ -9,9 +9,37 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.anthony_powell.citadel.UserActivity"
     tools:showIn="@layout/app_bar_user">
-    <Button
-        android:layout_width="wrap_content"
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/TextInputLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Here is a button."/>
+        android:paddingLeft="8dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search"
+            android:inputType="date"
+            android:maxLines="1"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <!--<android.support.v7.widget.SearchView-->
+        <!--android:id="@+id/searchView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:showDividers="end">-->
+
+    <!--</android.support.v7.widget.SearchView>-->
+
+    <ListView
+        android:id="@+id/orderList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TextInputLayout">
+
+    </ListView>
 
 </RelativeLayout>

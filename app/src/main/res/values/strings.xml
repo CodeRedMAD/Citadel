@@ -20,4 +20,17 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="GOOGLE_MAPS_API_KEY">AIzaSyD4a6ny0RFrQf_gdbBekoD1ZgtFLA7U0-o</string>
+
+    <string-array name="itemType">
+        <item>4 1/2</item>
+        <item>5 1/2</item>
+        <item>7</item>
+        <item>9 5/8</item>
+    </string-array>
+
+
 </resources>

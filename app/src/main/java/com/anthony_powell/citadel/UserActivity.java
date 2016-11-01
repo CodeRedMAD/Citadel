@@ -1,8 +1,10 @@
 package com.anthony_powell.citadel;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,9 +14,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 public class UserActivity extends AppCompatActivity
   implements NavigationView.OnNavigationItemSelectedListener {
+
+ private List<String> itemList = new ArrayList<>();
+ private List<Integer> itemIMGLink = new ArrayList<>();
+ private List<String> itemOrderDate = new ArrayList<>();
+ private ListView listView;
 
  @Override
  protected void onCreate(Bundle savedInstanceState) {
@@ -23,23 +39,52 @@ public class UserActivity extends AppCompatActivity
   Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
   setSupportActionBar(toolbar);
 
+  listView = (ListView) findViewById(R.id.orderList);
+
+
+  itemList.add("4 1/2");
+  itemIMGLink.add(R.drawable.guiding_equipment_family);
+  itemOrderDate.add(RandomDate());
+  itemList.add("5 1/2");
+  itemIMGLink.add(R.drawable.plug_placement_aide_with_dart_no_bg);
+  itemOrderDate.add(RandomDate());
+  itemList.add("7");
+  itemIMGLink.add(R.drawable.surface_equipment_family);
+  itemOrderDate.add(RandomDate());
+  itemList.add("9 5/8");
+  itemIMGLink.add(R.drawable.guiding_equipment_family);
+  itemOrderDate.add(RandomDate());
+
+
+  ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.orders_nav_view, itemList);
+
+
+
   FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
   fab.setOnClickListener(new View.OnClickListener() {
    @Override
    public void onClick(View view) {
-    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-      .setAction("Action", null).show();
+    startActivity(new Intent(UserActivity.this, mapsFragment.class));
+//    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//      .setAction("Action", null).show();
    }
   });
 
   DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
   ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
     this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
   drawer.setDrawerListener(toggle);
   toggle.syncState();
 
   NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
   navigationView.setNavigationItemSelectedListener(this);
+
+  TextView search = (TextView) findViewById(R.id.searchView);
+
+
  }
 
  @Override
@@ -81,7 +126,7 @@ public class UserActivity extends AppCompatActivity
   int id = item.getItemId();
 
   if (id == R.id.nav_orders) {
-   // Handle the camera action
+   listView.setAdapter(new CustomAdapter(this, itemList, itemOrderDate, itemIMGLink));
   } else if (id == R.id.nav_orders) {
 
   } else if (id == R.id.nav_orders) {
@@ -98,4 +143,26 @@ public class UserActivity extends AppCompatActivity
   drawer.closeDrawer(GravityCompat.START);
   return true;
  }
-}
+ public String RandomDate(){
+  GregorianCalendar gc = new GregorianCalendar();
+
+  int year = randBetween(2015, 2016);
+
+  gc.set(gc.YEAR, year);
+
+  int dayOfYear = randBetween(1, gc.getActualMaximum(gc.DAY_OF_YEAR));
+
+  gc.set(gc.DAY_OF_YEAR, dayOfYear);
+
+  return (gc.get(gc.YEAR) + "-" + (gc.get(gc.MONTH) + 1) + "-" + gc.get(gc.DAY_OF_MONTH));
+
+ }
+ public static int randBetween(int start, int end) {
+  return start + (int)Math.round(Math.random() * (end - start));
+ }
+
+
+ }
+
+
+
