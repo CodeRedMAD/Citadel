@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.SearchView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -56,9 +59,6 @@ public class UserActivity extends AppCompatActivity
   itemOrderDate.add(RandomDate());
 
 
-  ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.orders_nav_view, itemList);
-
-
 
   FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -68,6 +68,28 @@ public class UserActivity extends AppCompatActivity
     startActivity(new Intent(UserActivity.this, mapsFragment.class));
 //    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //      .setAction("Action", null).show();
+
+    EditText search = (EditText) findViewById(R.id.searchView);
+    search.addTextChangedListener(new TextWatcher() {
+     @Override
+     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+      
+     }
+
+     @Override
+     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+     }
+
+     @Override
+     public void afterTextChanged(Editable editable) {
+
+     }
+    });
+
+
+
+
    }
   });
 
@@ -81,9 +103,6 @@ public class UserActivity extends AppCompatActivity
   NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
   navigationView.setNavigationItemSelectedListener(this);
-
-  TextView search = (TextView) findViewById(R.id.searchView);
-
 
  }
 
@@ -143,6 +162,8 @@ public class UserActivity extends AppCompatActivity
   drawer.closeDrawer(GravityCompat.START);
   return true;
  }
+
+
  public String RandomDate(){
   GregorianCalendar gc = new GregorianCalendar();
 
